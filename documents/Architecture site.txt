@@ -1,0 +1,60 @@
+scraply-auto/
+│
+├── app/
+│   ├── layout.jsx
+│   ├── page.jsx
+│   ├── globals.css
+│   │
+│   ├── areas/
+│   │   └── [city]/
+│   │       └── page.jsx
+│   │
+│   ├── admin/
+│   │   ├── login/page.jsx
+│   │   ├── dashboard/page.jsx
+│   │   └── leads/
+│   │       ├── page.jsx
+│   │       └── [id]/page.jsx
+│   │
+│   └── api/
+│       ├── quote/route.js
+│       ├── contact/route.js
+│       ├── upload/route.js
+│       └── admin/
+│           └── leads/
+│               ├── route.js
+│               └── [id]/route.js
+│
+├── components/
+│   ├── layout/
+│   ├── home/
+│   ├── forms/
+│   ├── admin/
+│   └── common/
+│
+├── lib/
+│   ├── db.js                 # connexion PostgreSQL avec pg
+│   ├── auth.js
+│   ├── cloudinary.js
+│   ├── email.js
+│   ├── validators.js
+│   └── queries/
+│       ├── leads.js          # SQL pour leads
+│       ├── users.js          # SQL pour admin/users
+│       ├── photos.js         # SQL pour photos
+│       └── serviceAreas.js   # SQL pour villes SEO
+│
+├── database/
+│   ├── schema.sql            # création tables/enums/index
+│   ├── seed.sql              # données initiales villes/admin
+│   └── reset.sql             # optionnel pour reset DB
+│
+├── public/
+│   └── images/
+│
+├── .env
+├── package.json
+├── next.config.js
+├── jsconfig.json
+├── tailwind.config.js
+└── postcss.config.js
