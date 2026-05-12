@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button"
 import { CheckCircle2, MapPin, Phone } from "lucide-react"
 import Footer from "@/components/layout/Footer"
 
+
 const cityData = {
   ottawa: {
     name: "Ottawa",
@@ -129,15 +130,13 @@ export default async function CityPage({ params }) {
             >
               Get Free Quote
             </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              className="border-white/20 text-white hover:bg-white/10 h-14 rounded-full font-semibold"
-              nativeButton={false} render={<a href="tel:+16475550100" />}
+            <a
+              href="tel:+16475550100"
+              className="inline-flex items-center gap-2 border border-white/30 text-white hover:bg-white/10 hover:border-white/60 text-base px-8 h-14 rounded-full font-semibold transition-all"
             >
-              <Phone className="w-5 h-5 mr-2" />
+              <Phone className="w-5 h-5" />
               (647) 555-0100
-            </Button>
+            </a>
           </div>
         </div>
       </section>
