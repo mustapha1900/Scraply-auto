@@ -5,29 +5,29 @@ import { Star } from "lucide-react"
 
 const reviews = [
   {
-    name: "Mark D.",
-    city: "Toronto, ON",
+    name: "Marc D.",
+    city: "Ottawa, ON",
     rating: 5,
-    text: "Scraply Auto gave me $850 for my 2009 Civic that wouldn't start. They came the next morning and I had cash in hand by noon. Couldn't be easier.",
+    text: "Scraply Auto gave me $900 for my 2008 Civic that wouldn't start. They came the next morning and I had cash in hand by noon. Couldn't be easier.",
     initials: "MD",
   },
   {
-    name: "Sarah K.",
-    city: "Mississauga, ON",
+    name: "Sophie K.",
+    city: "Gatineau, QC",
     rating: 5,
-    text: "Best experience selling a junk car. No haggling, no games. The price they quoted over the phone was exactly what I got on pickup day.",
+    text: "Meilleur service pour vendre une vieille voiture. No haggling, no games. The price they quoted over the phone was exactly what I got on pickup day.",
     initials: "SK",
   },
   {
     name: "Ahmed R.",
-    city: "Brampton, ON",
+    city: "Kanata, ON",
     rating: 5,
-    text: "Called at 9am, tow truck was there by 2pm, and I was paid same day. These guys are legit. Already recommended them to two friends.",
+    text: "Called at 9am, tow truck was there by 2pm, and I was paid same day. These guys are legit. Already recommended them to two friends in Barrhaven.",
     initials: "AR",
   },
   {
     name: "Jennifer L.",
-    city: "Scarborough, ON",
+    city: "Barrhaven, ON",
     rating: 5,
     text: "I was worried because my car had no title but they helped me sort everything out over the phone. Super professional and fair price.",
     initials: "JL",

@@ -15,11 +15,12 @@ const navigation = {
     { label: "Salvage Car Buyers", href: "/services/salvage-cars" },
   ],
   areas: [
-    { label: "Toronto", href: "/areas/toronto" },
     { label: "Ottawa", href: "/areas/ottawa" },
-    { label: "Mississauga", href: "/areas/mississauga" },
-    { label: "Brampton", href: "/areas/brampton" },
-    { label: "Scarborough", href: "/areas/scarborough" },
+    { label: "Gatineau", href: "/areas/gatineau" },
+    { label: "Rockland", href: "/areas/rockland" },
+    { label: "Carleton Place", href: "/areas/carleton-place" },
+    { label: "Kemptville", href: "/areas/kemptville" },
+    { label: "Smiths Falls", href: "/areas/smiths-falls" },
   ],
 }
 
