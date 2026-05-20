@@ -25,7 +25,7 @@ const cityData = {
     province: "ON",
     neighborhoods: ["Clarence-Rockland", "Bourget", "Hammond", "Cheney", "Wendover"],
     description:
-      "Scraply Auto offers junk car removal throughout the Rockland and Clarence-Rockland area, about 40 km east of Ottawa. Free towing, offer within 30 minutes, cash paid on pickup.",
+      "Scraply Auto offers junk car removal throughout the Rockland and Clarence-Rockland area, about 40 km east of Ottawa. Free towing, offer within 24 hours, cash paid on pickup.",
   },
   "carleton-place": {
     name: "Carleton Place",
@@ -67,7 +67,7 @@ const cityData = {
     province: "ON",
     neighborhoods: ["Hawkesbury downtown", "Vankleek Hill", "L'Orignal", "Champlain Township"],
     description:
-      "Scraply Auto covers Hawkesbury and all of Prescott and Russell County east of Ottawa. Bilingual service, free towing, offer within 30 minutes.",
+      "Scraply Auto covers Hawkesbury and all of Prescott and Russell County east of Ottawa. Bilingual service, free towing, offer within 24 hours.",
   },
 }
 

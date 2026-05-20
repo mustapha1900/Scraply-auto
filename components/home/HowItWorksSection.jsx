@@ -16,7 +16,7 @@ const steps = [
     icon: MessageSquareDot,
     title: "Receive Your Offer",
     description:
-      "Our team reviews your submission and calls you back within 30 minutes with a real, no-obligation cash offer.",
+      "Our team reviews your submission and calls you back within 24 hours with a real, no-obligation cash offer.",
   },
   {
     number: "03",
@@ -36,7 +36,7 @@ const steps = [
 
 export default function HowItWorksSection() {
   return (
-    <section className="py-20 bg-white">
+    <section className="py-20 bg-gradient-to-b from-slate-50 to-white">
       <div className="max-w-7xl mx-auto px-6">
 
         <motion.div
@@ -74,10 +74,10 @@ export default function HowItWorksSection() {
 
                 <div className="flex flex-col items-center text-center">
                   <div className="relative mb-5">
-                    <div className="w-20 h-20 bg-orange-50 rounded-2xl flex items-center justify-center">
-                      <Icon className="w-9 h-9 text-orange-500" />
+                    <div className="w-20 h-20 bg-gradient-to-br from-orange-400 to-orange-600 rounded-2xl flex items-center justify-center shadow-lg shadow-orange-500/30">
+                      <Icon className="w-9 h-9 text-white" />
                     </div>
-                    <span className="absolute -top-2 -right-2 w-6 h-6 bg-orange-500 text-white text-xs font-bold rounded-full flex items-center justify-center">
+                    <span className="absolute -top-2 -right-2 w-7 h-7 bg-slate-900 text-white text-xs font-black rounded-full flex items-center justify-center ring-2 ring-white">
                       {index + 1}
                     </span>
                   </div>

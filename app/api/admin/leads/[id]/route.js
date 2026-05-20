@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server"
-import { updateLeadStatus, updateLeadNotes } from "@/lib/queries/leads"
+import { updateLeadStatus, updateLeadNotes, updateLeadOfferedPrice } from "@/lib/queries/leads"
 import { cookies } from "next/headers"
 
 async function checkAuth() {
@@ -22,6 +22,9 @@ export async function PATCH(request, { params }) {
     }
     if (data.notes !== undefined) {
       await updateLeadNotes(id, data.notes)
+    }
+    if (data.offered_price !== undefined) {
+      await updateLeadOfferedPrice(id, data.offered_price)
     }
     return NextResponse.json({ success: true })
   } catch (error) {
