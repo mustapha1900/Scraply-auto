@@ -1,5 +1,4 @@
 import Link from "next/link"
-import { Button } from "@/components/ui/button"
 import { Phone } from "lucide-react"
 
 export default function CTASection() {
@@ -16,13 +15,12 @@ export default function CTASection() {
         </p>
 
         <div className="mt-10 flex flex-wrap justify-center gap-4">
-          <Button
-            size="lg"
-            className="bg-white text-orange-500 hover:bg-orange-50 text-base px-10 h-14 rounded-full font-bold shadow-lg"
-            nativeButton={false} render={<Link href="/#quote" />}
+          <Link
+            href="/#quote"
+            className="inline-flex items-center bg-white text-orange-500 hover:bg-orange-50 text-base px-10 h-14 rounded-full font-bold shadow-lg transition-colors"
           >
             Get Free Quote Now
-          </Button>
+          </Link>
           <a
             href="tel:+16475550100"
             className="inline-flex items-center gap-2 border border-white/40 text-white hover:bg-white/10 hover:border-white/70 text-base px-8 h-14 rounded-full font-semibold transition-all"

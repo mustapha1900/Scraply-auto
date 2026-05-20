@@ -1,9 +1,30 @@
 import { NextResponse } from "next/server"
 
+function getAdminUsers() {
+  // Support multiple admins via ADMIN_USERS JSON array
+  if (process.env.ADMIN_USERS) {
+    try {
+      return JSON.parse(process.env.ADMIN_USERS)
+    } catch {
+      console.error("ADMIN_USERS is not valid JSON")
+    }
+  }
+  // Fallback to single admin (backward compatible)
+  if (process.env.ADMIN_EMAIL && process.env.ADMIN_PASSWORD) {
+    return [{ email: process.env.ADMIN_EMAIL, password: process.env.ADMIN_PASSWORD }]
+  }
+  return []
+}
+
 export async function POST(request) {
   const { email, password } = await request.json()
 
-  if (email !== process.env.ADMIN_EMAIL || password !== process.env.ADMIN_PASSWORD) {
+  const users = getAdminUsers()
+  const match = users.find(
+    (u) => u.email === email && u.password === password
+  )
+
+  if (!match) {
     return NextResponse.json({ error: "Invalid email or password" }, { status: 401 })
   }
 

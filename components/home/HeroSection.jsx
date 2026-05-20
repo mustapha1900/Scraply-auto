@@ -1,16 +1,58 @@
 "use client"
 
-import { motion } from "framer-motion"
+import { useEffect, useRef, useState } from "react"
+import { motion, useInView, animate } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { CheckCircle2, Phone } from "lucide-react"
 import Image from "next/image"
 
 const stats = [
-  { value: "1,200+", label: "Cars Bought" },
-  { value: "4.9★", label: "Google Rating" },
-  { value: "< 1 hr", label: "Avg. Response" },
-  { value: "50+", label: "Cities Served" },
+  { numeric: 1200, suffix: "+", label: "Cars Bought" },
+  { numeric: 4.9, suffix: "★", label: "Google Rating", decimals: 1 },
+  { prefix: "< ", numeric: 24, suffix: "h", label: "Response Time" },
+  { numeric: 50, suffix: "+", label: "Cities Served" },
 ]
+
+function CountUp({ numeric, suffix = "", prefix = "", decimals = 0, inView }) {
+  const [display, setDisplay] = useState("0")
+
+  useEffect(() => {
+    if (!inView) return
+    const controls = animate(0, numeric, {
+      duration: 2,
+      ease: "easeOut",
+      onUpdate: (v) =>
+        setDisplay(decimals > 0 ? v.toFixed(decimals) : Math.round(v).toLocaleString()),
+    })
+    return controls.stop
+  }, [inView, numeric, decimals])
+
+  return <span>{prefix}{display}{suffix}</span>
+}
+
+function StatsBar() {
+  const ref = useRef(null)
+  const inView = useInView(ref, { once: true, margin: "-50px" })
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, delay: 0.6 }}
+      className="mt-20 grid grid-cols-2 lg:grid-cols-4 gap-8 border-t border-white/10 pt-10"
+    >
+      {stats.map((stat) => (
+        <div key={stat.label}>
+          <div className="text-3xl lg:text-4xl font-black text-white">
+            <CountUp {...stat} inView={inView} />
+          </div>
+          <div className="text-sm text-slate-400 mt-1 font-medium">{stat.label}</div>
+        </div>
+      ))}
+    </motion.div>
+  )
+}
 
 const trustBadges = ["No hidden fees", "Same-day pickup", "Licensed recycler", "Free towing"]
 
@@ -132,19 +174,7 @@ export default function HeroSection() {
         </div>
 
         {/* Stats bar */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.6 }}
-          className="mt-20 grid grid-cols-2 lg:grid-cols-4 gap-8 border-t border-white/10 pt-10"
-        >
-          {stats.map((stat) => (
-            <div key={stat.label}>
-              <div className="text-3xl lg:text-4xl font-black text-white">{stat.value}</div>
-              <div className="text-sm text-slate-400 mt-1 font-medium">{stat.label}</div>
-            </div>
-          ))}
-        </motion.div>
+        <StatsBar />
 
       </div>
     </section>

@@ -41,6 +41,12 @@ export default async function LeadsPage({ searchParams }) {
             {leads.length} lead{leads.length !== 1 ? "s" : ""} found
           </p>
         </div>
+        <a
+          href="/api/admin/leads/export"
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white border border-gray-200 hover:border-gray-400 text-sm font-medium text-gray-700 transition-colors shadow-sm"
+        >
+          ↓ Export CSV
+        </a>
       </div>
 
       {/* Filters */}
@@ -80,7 +86,9 @@ export default async function LeadsPage({ searchParams }) {
               {leads.map((lead) => (
                 <tr key={lead.id} className="border-b border-gray-50 hover:bg-orange-50/30 transition-colors">
                   <td className="px-6 py-4 text-gray-400 font-mono text-xs">{lead.id}</td>
-                  <td className="px-6 py-4 font-medium text-slate-900">{lead.first_name}</td>
+                  <td className="px-6 py-4 font-medium text-slate-900">
+                    {[lead.first_name, lead.last_name].filter(Boolean).join(" ")}
+                  </td>
                   <td className="px-6 py-4 text-gray-600">{lead.phone}</td>
                   <td className="px-6 py-4 text-gray-600">{lead.city}</td>
                   <td className="px-6 py-4 text-gray-600">

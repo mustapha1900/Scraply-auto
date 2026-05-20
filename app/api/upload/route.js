@@ -8,6 +8,8 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 })
 
+const MAX_FILE_SIZE = 5 * 1024 * 1024 // 5 MB
+
 export async function POST(request) {
   try {
     const formData = await request.formData()
@@ -18,6 +20,11 @@ export async function POST(request) {
       return NextResponse.json({ error: "Missing lead_id or photos" }, { status: 400 })
     }
 
+    const oversized = files.find((f) => f.size > MAX_FILE_SIZE)
+    if (oversized) {
+      return NextResponse.json({ error: "Each photo must be under 5 MB" }, { status: 400 })
+    }
+
     const uploads = await Promise.all(
       files.slice(0, 4).map(async (file, i) => {
         const bytes = await file.arrayBuffer()
@@ -25,7 +32,7 @@ export async function POST(request) {
 
         return new Promise((resolve, reject) => {
           cloudinary.uploader.upload_stream(
-            { folder: "scraply-auto", resource_type: "image" },
+            { folder: "scraply-auto", resource_type: "image", quality: "auto", fetch_format: "auto" },
             (error, result) => {
               if (error) reject(error)
               else resolve({

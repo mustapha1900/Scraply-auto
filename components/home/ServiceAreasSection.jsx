@@ -31,7 +31,7 @@ const cities = [
 
 export default function ServiceAreasSection() {
   return (
-    <section className="py-20 bg-gray-50">
+    <section className="py-20 bg-gradient-to-b from-white to-slate-50">
       <div className="max-w-7xl mx-auto px-6">
 
         <div className="text-center mb-12">
@@ -50,11 +50,13 @@ export default function ServiceAreasSection() {
             <Link
               key={city.slug}
               href={`/areas/${city.slug}`}
-              className="group bg-white rounded-2xl p-6 border border-gray-100 hover:border-orange-200 hover:shadow-md transition-all"
+              className="group bg-white rounded-2xl p-6 border border-gray-100 hover:border-orange-300 hover:shadow-lg hover:shadow-orange-500/10 hover:-translate-y-1 transition-all duration-200"
             >
               <div className="flex items-start justify-between mb-3">
                 <div className="flex items-center gap-2">
-                  <MapPin className="w-5 h-5 text-orange-500 shrink-0" />
+                  <div className="w-8 h-8 bg-orange-100 rounded-lg flex items-center justify-center shrink-0 group-hover:bg-orange-500 transition-colors">
+                    <MapPin className="w-4 h-4 text-orange-500 group-hover:text-white transition-colors" />
+                  </div>
                   <span className="font-bold text-slate-900 text-lg">{city.name}</span>
                 </div>
                 <ArrowRight className="w-4 h-4 text-gray-400 group-hover:text-orange-500 group-hover:translate-x-1 transition-all" />

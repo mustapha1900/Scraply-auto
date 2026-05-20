@@ -1,15 +1,24 @@
 "use client"
 
-import { useState, useRef } from "react"
+import { useState, useRef, useEffect } from "react"
 import { useForm } from "react-hook-form"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
-import { CheckCircle2, Loader2, Phone, Camera, X } from "lucide-react"
+import { CheckCircle2, Loader2, Camera, X } from "lucide-react"
 import { motion } from "framer-motion"
 import Image from "next/image"
 
-const years = Array.from({ length: 46 }, (_, i) => 2025 - i)
+const MAKES = [
+  "Acura", "Audi", "BMW", "Buick", "Cadillac", "Chevrolet", "Chrysler",
+  "Dodge", "Ford", "GMC", "Honda", "Hyundai", "Infiniti", "Jeep", "Kia",
+  "Land Rover", "Lexus", "Lincoln", "Mazda", "Mercedes-Benz", "Mercury",
+  "MINI", "Mitsubishi", "Nissan", "Oldsmobile", "Pontiac", "Porsche",
+  "Ram", "Saturn", "Scion", "Subaru", "Suzuki", "Tesla", "Toyota",
+  "Volkswagen", "Volvo", "Other",
+]
+
+const years = Array.from({ length: 46 }, (_, i) => 2026 - i)
 const conditions = ["Good", "Fair", "Poor", "Damaged — Not Drivable", "Parts Only"]
 const cities = [
   "Ottawa",
@@ -47,14 +56,39 @@ export default function QuoteFormSection() {
   const [status, setStatus] = useState("idle")
   const [photos, setPhotos] = useState([])
   const [previews, setPreviews] = useState([])
+  const [models, setModels] = useState([])
+  const [loadingModels, setLoadingModels] = useState(false)
   const fileInputRef = useRef(null)
 
   const {
     register,
     handleSubmit,
     reset,
+    watch,
+    setValue,
     formState: { errors },
   } = useForm()
+
+  const selectedYear = watch("year")
+  const selectedMake = watch("make")
+  const selectedModel = watch("model")
+
+  // Fetch models when year + make are both selected
+  useEffect(() => {
+    if (!selectedYear || !selectedMake || selectedMake === "Other") {
+      setModels([])
+      return
+    }
+    setValue("model", "")
+    setValue("trim", "")
+    setLoadingModels(true)
+    fetch(`/api/vehicles?cmd=getModels&year=${selectedYear}&make=${encodeURIComponent(selectedMake)}`)
+      .then((res) => res.json())
+      .then((data) => setModels(data.models || []))
+      .catch(() => setModels([]))
+      .finally(() => setLoadingModels(false))
+  }, [selectedYear, selectedMake])
+
 
   const handleFileChange = (e) => {
     const files = Array.from(e.target.files).slice(0, 4)
@@ -109,7 +143,7 @@ export default function QuoteFormSection() {
             <CheckCircle2 className="w-16 h-16 text-green-500 mx-auto mb-6" />
             <h2 className="text-3xl font-bold mb-3">We got your request!</h2>
             <p className="text-gray-500 text-lg">
-              Our team will call you within 30 minutes with your free cash offer.
+              Our team will call you within 24 hours with your free cash offer.
             </p>
             <Button
               className="mt-8 bg-orange-500 hover:bg-orange-600 text-white rounded-full px-8"
@@ -124,24 +158,30 @@ export default function QuoteFormSection() {
   }
 
   return (
-    <section className="py-20 bg-gray-50" id="quote">
+    <section className="py-20 bg-gradient-to-br from-orange-50 via-white to-slate-50" id="quote">
       <div className="max-w-6xl mx-auto px-6">
 
         <div className="text-center mb-12">
+          <p className="text-orange-500 font-semibold text-sm uppercase tracking-widest mb-3">Free &amp; No Obligation</p>
           <h2 className="text-4xl font-bold text-slate-900">Get Your Free Quote</h2>
           <p className="text-gray-500 text-lg mt-3 max-w-xl mx-auto">
-            Fill in your vehicle details and we&apos;ll call you back within 30 minutes with a real cash offer.
+            Fill in your vehicle details and we&apos;ll call you back within 24 hours with a real cash offer.
           </p>
         </div>
 
         <div className="grid lg:grid-cols-5 gap-10 items-start">
 
           {/* Form card */}
-          <div className="lg:col-span-3 bg-white rounded-3xl p-8 shadow-sm border">
+          <div className="lg:col-span-3 bg-white rounded-3xl shadow-md border border-orange-100 overflow-hidden">
+            <div className="bg-gradient-to-r from-orange-500 to-orange-600 px-8 py-5">
+              <h3 className="text-white font-bold text-lg">Tell us about your vehicle</h3>
+              <p className="text-orange-100 text-sm mt-0.5">Takes less than 2 minutes · 100% free</p>
+            </div>
+            <div className="p-8">
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
 
-              {/* Row: First Name + Phone */}
-              <div className="grid sm:grid-cols-2 gap-4">
+              {/* Row: First Name + Last Name + Phone */}
+              <div className="grid sm:grid-cols-3 gap-4">
                 <div>
                   <label className="text-sm font-medium text-gray-700 mb-1.5 block">
                     First Name <span className="text-orange-500">*</span>
@@ -153,6 +193,19 @@ export default function QuoteFormSection() {
                   />
                   {errors.firstName && (
                     <p className="text-red-500 text-xs mt-1">{errors.firstName.message}</p>
+                  )}
+                </div>
+                <div>
+                  <label className="text-sm font-medium text-gray-700 mb-1.5 block">
+                    Last Name <span className="text-orange-500">*</span>
+                  </label>
+                  <Input
+                    placeholder="Smith"
+                    {...register("lastName", { required: "Required" })}
+                    className={errors.lastName ? "border-red-400" : ""}
+                  />
+                  {errors.lastName && (
+                    <p className="text-red-500 text-xs mt-1">{errors.lastName.message}</p>
                   )}
                 </div>
                 <div>
@@ -215,8 +268,8 @@ export default function QuoteFormSection() {
                 </div>
               </div>
 
-              {/* Row: Year + Make + Model */}
-              <div className="grid sm:grid-cols-3 gap-4">
+              {/* Row 1: Year + Make */}
+              <div className="grid sm:grid-cols-2 gap-4">
                 <div>
                   <label className="text-sm font-medium text-gray-700 mb-1.5 block">
                     Year <span className="text-orange-500">*</span>
@@ -225,7 +278,7 @@ export default function QuoteFormSection() {
                     {...register("year", { required: "Required" })}
                     className={`${selectClass} ${errors.year ? "border-red-400" : ""}`}
                   >
-                    <option value="">Year</option>
+                    <option value="">Select year...</option>
                     {years.map((y) => (
                       <option key={y} value={y}>{y}</option>
                     ))}
@@ -238,27 +291,66 @@ export default function QuoteFormSection() {
                   <label className="text-sm font-medium text-gray-700 mb-1.5 block">
                     Make <span className="text-orange-500">*</span>
                   </label>
-                  <Input
-                    placeholder="Toyota"
+                  <select
                     {...register("make", { required: "Required" })}
-                    className={errors.make ? "border-red-400" : ""}
-                  />
+                    disabled={!selectedYear}
+                    className={`${selectClass} ${errors.make ? "border-red-400" : ""} disabled:opacity-50 disabled:cursor-not-allowed`}
+                  >
+                    <option value="">{!selectedYear ? "Select year first" : "Select make..."}</option>
+                    {MAKES.map((m) => (
+                      <option key={m} value={m}>{m}</option>
+                    ))}
+                  </select>
                   {errors.make && (
                     <p className="text-red-500 text-xs mt-1">{errors.make.message}</p>
                   )}
                 </div>
+              </div>
+
+              {/* Row 2: Model + Trim */}
+              <div className="grid sm:grid-cols-2 gap-4">
                 <div>
                   <label className="text-sm font-medium text-gray-700 mb-1.5 block">
                     Model <span className="text-orange-500">*</span>
                   </label>
-                  <Input
-                    placeholder="Camry"
-                    {...register("model", { required: "Required" })}
-                    className={errors.model ? "border-red-400" : ""}
-                  />
+                  {selectedMake === "Other" || (selectedMake && selectedYear && !loadingModels && models.length === 0) ? (
+                    <Input
+                      placeholder="Enter model"
+                      {...register("model", { required: "Required" })}
+                      className={errors.model ? "border-red-400" : ""}
+                    />
+                  ) : (
+                    <select
+                      {...register("model", { required: "Required" })}
+                      disabled={!selectedMake || !selectedYear || loadingModels}
+                      className={`${selectClass} ${errors.model ? "border-red-400" : ""} disabled:opacity-50 disabled:cursor-not-allowed`}
+                    >
+                      <option value="">
+                        {!selectedMake || !selectedYear
+                          ? "Select year & make first"
+                          : loadingModels
+                          ? "Loading models..."
+                          : "Select model..."}
+                      </option>
+                      {models.map((m) => (
+                        <option key={m} value={m}>{m}</option>
+                      ))}
+                    </select>
+                  )}
                   {errors.model && (
                     <p className="text-red-500 text-xs mt-1">{errors.model.message}</p>
                   )}
+                </div>
+                <div>
+                  <label className="text-sm font-medium text-gray-700 mb-1.5 block">
+                    Trim <span className="text-gray-400 font-normal">(optional)</span>
+                  </label>
+                  <Input
+                    placeholder="e.g. LX, EX, Sport, Touring"
+                    {...register("trim")}
+                    disabled={!selectedModel}
+                    className="disabled:opacity-50 disabled:cursor-not-allowed"
+                  />
                 </div>
               </div>
 
@@ -411,6 +503,7 @@ export default function QuoteFormSection() {
               </p>
 
             </form>
+            </div>{/* end p-8 */}
           </div>
 
           {/* Benefits sidebar */}

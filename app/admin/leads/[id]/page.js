@@ -90,7 +90,7 @@ export default async function LeadDetailPage({ params }) {
 
           <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
             <h2 className="font-semibold text-slate-900 mb-4">Contact Information</h2>
-            <InfoRow label="First Name" value={lead.first_name} />
+            <InfoRow label="Name" value={[lead.first_name, lead.last_name].filter(Boolean).join(" ")} />
             <div className="flex items-start gap-4 py-3 border-b border-gray-100">
               <span className="text-sm text-gray-500 w-36 shrink-0">Phone</span>
               <a href={`tel:${lead.phone}`} className="text-sm font-medium text-green-600 hover:underline">{lead.phone}</a>
@@ -109,6 +109,7 @@ export default async function LeadDetailPage({ params }) {
             <InfoRow label="Year" value={lead.vehicle_year?.toString()} />
             <InfoRow label="Make" value={lead.vehicle_make} />
             <InfoRow label="Model" value={lead.vehicle_model} />
+            <InfoRow label="Trim" value={lead.vehicle_trim} />
             <InfoRow label="Mileage" value={lead.mileage} />
             <InfoRow label="Condition" value={lead.condition} />
             <InfoRow label="Running" value={lead.is_running === true ? "Yes" : lead.is_running === false ? "No" : null} />
@@ -156,6 +157,7 @@ export default async function LeadDetailPage({ params }) {
             leadId={lead.id}
             currentStatus={lead.status}
             currentNotes={lead.internal_notes}
+            currentOfferedPrice={lead.offered_price}
           />
         </div>
 

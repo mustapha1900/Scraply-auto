@@ -1,4 +1,6 @@
 import HeroSection from "@/components/home/HeroSection"
+import TrustStrip from "@/components/home/TrustStrip"
+import BrandsSection from "@/components/home/BrandsSection"
 import QuoteFormSection from "@/components/home/QuoteFormSection"
 import HowItWorksSection from "@/components/home/HowItWorksSection"
 import AnyCarSection from "@/components/home/AnyCarSection"
@@ -12,6 +14,8 @@ export default function HomePage() {
   return (
     <main>
       <HeroSection />
+      <TrustStrip />
+      <BrandsSection />
       <QuoteFormSection />
       <HowItWorksSection />
       <AnyCarSection />

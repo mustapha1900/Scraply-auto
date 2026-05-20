@@ -11,7 +11,7 @@ const faqs = [
     items: [
       {
         q: "How do I get a quote for my junk car?",
-        a: "Simply fill out our quick online form or call us at (647) 555-0100. We'll ask for basic info about your vehicle — year, make, model, condition — and call you back within 30 minutes with a real cash offer.",
+        a: "Simply fill out our quick online form or call us at (647) 555-0100. We'll ask for basic info about your vehicle — year, make, model, condition — and call you back within 24 hours with a real cash offer.",
       },
       {
         q: "Is the quote really free and no-obligation?",

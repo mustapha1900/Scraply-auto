@@ -105,7 +105,7 @@ export default function ContactPage() {
               <div className="bg-orange-500 rounded-2xl p-6 text-white mt-6">
                 <p className="font-bold text-lg mb-1">Fastest way to get a quote?</p>
                 <p className="text-orange-100 text-sm mb-4">
-                  Call us directly — we respond within 30 minutes with a real cash offer.
+                  Call us directly — we respond within 24 hours with a real cash offer.
                 </p>
                 <a
                   href="tel:+16475550100"

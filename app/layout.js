@@ -13,7 +13,7 @@ export const metadata = {
     template: "%s | Scraply Auto",
   },
   description:
-    "Get top cash for your junk, scrap, or damaged car in Ottawa and Gatineau. Free towing, same-day pickup, offer within 30 minutes. Serving all areas within 100 km of Ottawa.",
+    "Get top cash for your junk, scrap, or damaged car in Ottawa and Gatineau. Free towing, same-day pickup, offer within 24 hours. Serving all areas within 100 km of Ottawa.",
   keywords: [
     "junk car Ottawa",
     "sell junk car Ottawa",
