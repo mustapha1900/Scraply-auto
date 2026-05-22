@@ -41,7 +41,7 @@ export default async function LeadDetailPage({ params }) {
   if (!lead) notFound()
 
   return (
-    <div className="p-8">
+    <div className="p-4 lg:p-8">
 
       <div className="mb-6">
         <Link href="/admin/leads" className="flex items-center gap-1.5 text-sm text-gray-500 hover:text-gray-900 mb-4 transition-colors">

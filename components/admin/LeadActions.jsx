@@ -100,7 +100,7 @@ export default function LeadActions({ leadId, currentStatus, currentNotes, curre
       {/* Offered Price */}
       <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
         <h3 className="font-semibold text-slate-900 mb-1">Offered Price</h3>
-        <p className="text-xs text-gray-400 mb-4">Amount offered to the customer (CAD)</p>
+        <p className="text-xs text-gray-400 mb-4">Amount offered to customer (CAD)</p>
         <div className="relative">
           <DollarSign className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
           <input
