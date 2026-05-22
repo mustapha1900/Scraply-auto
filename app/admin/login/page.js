@@ -1,13 +1,12 @@
 "use client"
 
 import { useState } from "react"
-import { useRouter } from "next/navigation"
+
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Loader2 } from "lucide-react"
 
 export default function AdminLoginPage() {
-  const router = useRouter()
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [error, setError] = useState("")
@@ -31,7 +30,7 @@ export default function AdminLoginPage() {
         return
       }
 
-      router.push("/admin/dashboard")
+      window.location.href = "/admin/dashboard"
     } catch {
       setError("Network error, please try again.")
     } finally {
