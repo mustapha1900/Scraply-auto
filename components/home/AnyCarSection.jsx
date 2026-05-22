@@ -3,7 +3,6 @@
 import { motion } from "framer-motion"
 import Image from "next/image"
 import { CheckCircle2 } from "lucide-react"
-import { Button } from "@/components/ui/button"
 import Link from "next/link"
 
 const points = [
@@ -21,28 +20,45 @@ export default function AnyCarSection() {
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid lg:grid-cols-2 gap-14 items-center">
 
-          {/* Photo */}
+          {/* Photos */}
           <motion.div
             initial={{ opacity: 0, x: -40 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="relative"
+            className="relative pb-10"
           >
             <div className="absolute -inset-4 bg-orange-500/10 rounded-3xl blur-2xl" />
+
+            {/* Main photo */}
             <div className="relative rounded-2xl overflow-hidden shadow-2xl">
               <Image
-                src="/assets/JunkCar2.jpg"
-                alt="We buy junk cars in any condition"
+                src="/assets/tucson_junk.jpg"
+                alt="Hyundai Tucson — junk car pickup Ottawa"
                 width={700}
-                height={500}
-                className="w-full h-auto object-cover"
+                height={480}
+                className="w-full h-80 object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent" />
-              <div className="absolute bottom-5 left-5 right-5">
-                <span className="inline-block bg-orange-500 text-white text-sm font-bold px-4 py-2 rounded-full">
-                  We buy cars like this — no questions asked
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-900/50 via-transparent to-transparent" />
+              <div className="absolute bottom-4 left-4">
+                <span className="inline-block bg-orange-500 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow">
+                  Recently purchased · Ottawa
                 </span>
+              </div>
+            </div>
+
+            {/* Secondary photo — overlapping bottom right */}
+            <div className="absolute -bottom-2 right-4 w-44 rounded-xl overflow-hidden shadow-2xl border-4 border-white">
+              <Image
+                src="/assets/Rav4_junk.jpg"
+                alt="Toyota RAV4 — junk car Ottawa"
+                width={200}
+                height={140}
+                className="w-full h-32 object-cover"
+              />
+              <div className="bg-white px-3 py-1.5">
+                <p className="text-xs font-semibold text-slate-700">Toyota RAV4</p>
+                <p className="text-xs text-gray-400">Gatineau pickup</p>
               </div>
             </div>
           </motion.div>
@@ -77,13 +93,12 @@ export default function AnyCarSection() {
             </ul>
 
             <div className="mt-10">
-              <Button
-                size="lg"
-                className="bg-orange-500 hover:bg-orange-600 text-white rounded-full px-8 h-13 font-semibold shadow-lg shadow-orange-500/20"
-                nativeButton={false} render={<Link href="/#quote" />}
+              <Link
+                href="/#quote"
+                className="inline-flex items-center bg-orange-500 hover:bg-orange-600 text-white text-base px-8 h-13 rounded-full font-semibold shadow-lg shadow-orange-500/20 transition-colors"
               >
                 Get My Free Cash Offer →
-              </Button>
+              </Link>
             </div>
           </motion.div>
 
